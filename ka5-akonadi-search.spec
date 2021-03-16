@@ -1,15 +1,15 @@
-%define		kdeappsver	19.04.1
+%define		kdeappsver	20.12.3
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		akonadi-search
 Summary:	Akonadi Search
 Name:		ka5-%{kaname}
-Version:	19.04.1
+Version:	20.12.3
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	b714fadccac47a64eabde12e6fbd3d2f
+Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	123da4ad3a731c8589f854370ea4dbf6
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Test-devel >= 5.9.0
@@ -17,12 +17,12 @@ BuildRequires:	cmake >= 2.8.12
 BuildRequires:	gettext-devel
 BuildRequires:	ka5-akonadi-devel >= %{kdeappsver}
 BuildRequires:	ka5-akonadi-mime-devel >= %{kdeappsver}
-BuildRequires:	ka5-kcalcore-devel >= %{kdeappsver}
-BuildRequires:	ka5-kcontacts-devel >= %{kdeappsver}
 BuildRequires:	ka5-kmime-devel >= %{kdeappsver}
 BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
+BuildRequires:	kf5-kcalendarcore-devel >= %{kframever}
 BuildRequires:	kf5-kcmutils-devel >= %{kframever}
 BuildRequires:	kf5-kconfig-devel >= %{kframever}
+BuildRequires:	kf5-kcontacts-devel >= %{kframever}
 BuildRequires:	kf5-kcrash-devel >= %{kframever}
 BuildRequires:	kf5-kdbusaddons-devel >= %{kframever}
 BuildRequires:	kf5-ki18n-devel >= %{kframever}
@@ -78,8 +78,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
-/etc/xdg/akonadi-search.categories
-/etc/xdg/akonadi-search.renamecategories
 %attr(755,root,root) %{_bindir}/akonadi_indexing_agent
 %attr(755,root,root) %ghost %{_libdir}/libKF5AkonadiSearchCore.so.5
 %attr(755,root,root) %{_libdir}/libKF5AkonadiSearchCore.so.5.*.*
@@ -95,10 +93,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt5/plugins/akonadi/emailsearchstore.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/akonadi/notesearchstore.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_krunner_pimcontacts.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/krunner_pimcontacts.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/kf5/krunner/krunner_pimcontacts.so
 %{_datadir}/akonadi/agents/akonadiindexingagent.desktop
-%{_datadir}/kservices5/plasma-krunner-pimcontacts.desktop
 %{_datadir}/kservices5/plasma-krunner-pimcontacts_config.desktop
+%{_datadir}/qlogging-categories5/akonadi-search.categories
+%{_datadir}/qlogging-categories5/akonadi-search.renamecategories
 
 %files devel
 %defattr(644,root,root,755)
