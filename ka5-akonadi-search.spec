@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	21.12.3
+%define		kdeappsver	22.04.0
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		akonadi-search
 Summary:	Akonadi Search
 Name:		ka5-%{kaname}
-Version:	21.12.3
-Release:	2
+Version:	22.04.0
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	5d3d0dcb0a04fe1f3edfc8b7f4512ffb
+# Source0-md5:	5c2803437d536e07088ed54a91fbe6eb
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Test-devel >= 5.9.0
@@ -101,17 +101,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt5/plugins/akonadi/contactsearchstore.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/akonadi/emailsearchstore.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/akonadi/notesearchstore.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/kcm_krunner_pimcontacts.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/kf5/krunner/krunner_pimcontacts.so
 %{_datadir}/akonadi/agents/akonadiindexingagent.desktop
-%{_datadir}/kservices5/plasma-krunner-pimcontacts_config.desktop
 %{_datadir}/qlogging-categories5/akonadi-search.categories
 %{_datadir}/qlogging-categories5/akonadi-search.renamecategories
+%attr(755,root,root) %{_libdir}/qt5/plugins/kf5/krunner/kcms/kcm_krunner_pimcontacts.so
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/KF5/AkonadiSearch
-%{_includedir}/KF5/akonadi_search_version.h
 %{_libdir}/cmake/KF5AkonadiSearch
 %{_libdir}/libKF5AkonadiSearchCore.so
 %{_libdir}/libKF5AkonadiSearchDebug.so
