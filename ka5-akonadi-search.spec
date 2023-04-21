@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	22.12.3
+%define		kdeappsver	23.04.0
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		akonadi-search
 Summary:	Akonadi Search
 Name:		ka5-%{kaname}
-Version:	22.12.3
-Release:	2
+Version:	23.04.0
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	2bbfe9726d285b59b474130e2190efcf
+# Source0-md5:	6d064494c475729a2602b2f626d4cf73
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Test-devel >= 5.9.0
@@ -89,30 +89,31 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/akonadi_indexing_agent
-%ghost %{_libdir}/libKF5AkonadiSearchCore.so.5
-%attr(755,root,root) %{_libdir}/libKF5AkonadiSearchCore.so.*.*.*
-%ghost %{_libdir}/libKF5AkonadiSearchDebug.so.5
-%attr(755,root,root) %{_libdir}/libKF5AkonadiSearchDebug.so.*.*.*
-%ghost %{_libdir}/libKF5AkonadiSearchPIM.so.5
-%attr(755,root,root) %{_libdir}/libKF5AkonadiSearchPIM.so.*.*.*
-%ghost %{_libdir}/libKF5AkonadiSearchXapian.so.5
-%attr(755,root,root) %{_libdir}/libKF5AkonadiSearchXapian.so.*.*.*
 %attr(755,root,root) %{_libdir}/qt5/plugins/kf5/krunner/krunner_pimcontacts.so
 %{_datadir}/akonadi/agents/akonadiindexingagent.desktop
 %{_datadir}/qlogging-categories5/akonadi-search.categories
 %{_datadir}/qlogging-categories5/akonadi-search.renamecategories
-%{_libdir}/qt5/plugins/kf5/krunner/kcms/kcm_krunner_pimcontacts.so
-%{_libdir}/qt5/plugins/pim5/akonadi/akonadi_search_plugin.so
-%{_libdir}/qt5/plugins/pim5/akonadi/calendarsearchstore.so
-%{_libdir}/qt5/plugins/pim5/akonadi/contactsearchstore.so
-%{_libdir}/qt5/plugins/pim5/akonadi/emailsearchstore.so
-%{_libdir}/qt5/plugins/pim5/akonadi/notesearchstore.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/kf5/krunner/kcms/kcm_krunner_pimcontacts.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/pim5/akonadi/akonadi_search_plugin.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/pim5/akonadi/calendarsearchstore.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/pim5/akonadi/contactsearchstore.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/pim5/akonadi/emailsearchstore.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/pim5/akonadi/notesearchstore.so
+%ghost %{_libdir}/libKPim5AkonadiSearchCore.so.5
+%attr(755,root,root) %{_libdir}/libKPim5AkonadiSearchCore.so.*.*.*
+%ghost %{_libdir}/libKPim5AkonadiSearchDebug.so.5
+%attr(755,root,root) %{_libdir}/libKPim5AkonadiSearchDebug.so.*.*.*
+%ghost %{_libdir}/libKPim5AkonadiSearchPIM.so.5
+%attr(755,root,root) %{_libdir}/libKPim5AkonadiSearchPIM.so.*.*.*
+%ghost %{_libdir}/libKPim5AkonadiSearchXapian.so.5
+%attr(755,root,root) %{_libdir}/libKPim5AkonadiSearchXapian.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/KF5/AkonadiSearch
+%{_includedir}/KPim5/AkonadiSearch
 %{_libdir}/cmake/KF5AkonadiSearch
-%{_libdir}/libKF5AkonadiSearchCore.so
-%{_libdir}/libKF5AkonadiSearchDebug.so
-%{_libdir}/libKF5AkonadiSearchPIM.so
-%{_libdir}/libKF5AkonadiSearchXapian.so
+%{_libdir}/cmake/KPim5AkonadiSearch
+%{_libdir}/libKPim5AkonadiSearchCore.so
+%{_libdir}/libKPim5AkonadiSearchDebug.so
+%{_libdir}/libKPim5AkonadiSearchPIM.so
+%{_libdir}/libKPim5AkonadiSearchXapian.so
