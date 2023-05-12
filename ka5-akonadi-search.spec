@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	23.04.0
+%define		kdeappsver	23.04.1
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		akonadi-search
 Summary:	Akonadi Search
 Name:		ka5-%{kaname}
-Version:	23.04.0
+Version:	23.04.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	6d064494c475729a2602b2f626d4cf73
+# Source0-md5:	259c4a53447ea5fa5b2b059aadb3540c
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Test-devel >= 5.9.0
