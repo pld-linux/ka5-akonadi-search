@@ -1,9 +1,10 @@
 #
 # Conditional build:
-%bcond_with	tests		# build with tests
+%bcond_with	tests		# test suite
+
 %define		kdeappsver	23.08.5
 %define		kframever	5.94.0
-%define		qtver		5.15.2
+%define		qt_ver		5.15.2
 %define		kaname		akonadi-search
 Summary:	Akonadi Search
 Name:		ka5-%{kaname}
@@ -14,7 +15,7 @@ Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
 # Source0-md5:	6b7a2c0afc7d235e51d3294ff5b3a684
 URL:		http://www.kde.org/
-BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5Core-devel >= %{qt_ver}
 BuildRequires:	Qt5Test-devel >= 5.9.0
 BuildRequires:	cmake >= 3.20
 BuildRequires:	gettext-devel
@@ -33,7 +34,7 @@ BuildRequires:	kf5-kio-devel >= %{kframever}
 BuildRequires:	kf5-krunner-devel >= %{kframever}
 BuildRequires:	kf5-plasma-framework-devel >= %{kframever}
 BuildRequires:	ninja
-BuildRequires:	qt5-build >= %{qtver}
+BuildRequires:	qt5-build >= %{qt_ver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
@@ -49,6 +50,13 @@ Summary:	Header files for %{kaname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kaname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	Qt5Core-devel >= %{qt_ver}
+Requires:	ka5-akonadi-devel >= %{kdeappsver}
+Requires:	ka5-akonadi-mime-devel >= %{kdeappsver}
+Requires:	ka5-kmime-devel >= %{kdeappsver}
+Requires:	kf5-kcalendarcore-devel >= 5.105.0
+Requires:	kf5-kcontacts-devel >= 5.105.0
+Requires:	kf5-kcoreaddons-devel >= 5.105.0
 
 %description devel
 Header files for %{kaname} development.
