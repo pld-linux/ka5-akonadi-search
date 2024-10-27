@@ -1,9 +1,12 @@
+# TODO: Corrosion https://github.com/corrosion-rs/corrosion
 #
 # Conditional build:
 %bcond_with	tests		# test suite
 
-%define		kdeappsver	23.08.5
-%define		kframever	5.94.0
+%define		kdeappsver	%{version}
+# packages version, not cmake config version (which is 5.24.5)
+%define		ka_ver		%{version}
+%define		kf_ver		5.105.0
 %define		qt_ver		5.15.2
 %define		kaname		akonadi-search
 Summary:	Akonadi Search
@@ -17,23 +20,24 @@ Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kan
 # Source0-md5:	6b7a2c0afc7d235e51d3294ff5b3a684
 URL:		https://kde.org/
 BuildRequires:	Qt5Core-devel >= %{qt_ver}
-BuildRequires:	Qt5Test-devel >= 5.9.0
+BuildRequires:	Qt5Gui-devel >= %{qt_ver}
+BuildRequires:	Qt5Test-devel >= %{qt_ver}
 BuildRequires:	cmake >= 3.20
 BuildRequires:	gettext-devel
-BuildRequires:	ka5-akonadi-devel >= %{kdeappsver}
-BuildRequires:	ka5-akonadi-mime-devel >= %{kdeappsver}
-BuildRequires:	ka5-kmime-devel >= %{kdeappsver}
-BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
-BuildRequires:	kf5-kcalendarcore-devel >= %{kframever}
-BuildRequires:	kf5-kcmutils-devel >= %{kframever}
-BuildRequires:	kf5-kconfig-devel >= %{kframever}
-BuildRequires:	kf5-kcontacts-devel >= %{kframever}
-BuildRequires:	kf5-kcrash-devel >= %{kframever}
-BuildRequires:	kf5-kdbusaddons-devel >= %{kframever}
-BuildRequires:	kf5-ki18n-devel >= %{kframever}
-BuildRequires:	kf5-kio-devel >= %{kframever}
-BuildRequires:	kf5-krunner-devel >= %{kframever}
-BuildRequires:	kf5-plasma-framework-devel >= %{kframever}
+BuildRequires:	ka5-akonadi-devel >= %{ka_ver}
+BuildRequires:	ka5-akonadi-mime-devel >= %{ka_ver}
+BuildRequires:	ka5-kmime-devel >= %{ka_ver}
+BuildRequires:	kf5-extra-cmake-modules >= %{kf_ver}
+BuildRequires:	kf5-kcalendarcore-devel >= %{kf_ver}
+BuildRequires:	kf5-kcmutils-devel >= %{kf_ver}
+BuildRequires:	kf5-kconfig-devel >= %{kf_ver}
+BuildRequires:	kf5-kconfigwidgets-devel >= %{kf_ver}
+BuildRequires:	kf5-kcontacts-devel >= %{kf_ver}
+BuildRequires:	kf5-kcrash-devel >= %{kf_ver}
+BuildRequires:	kf5-kdbusaddons-devel >= %{kf_ver}
+BuildRequires:	kf5-ki18n-devel >= %{kf_ver}
+BuildRequires:	kf5-kio-devel >= %{kf_ver}
+BuildRequires:	kf5-krunner-devel >= %{kf_ver}
 BuildRequires:	ninja
 BuildRequires:	qt5-build >= %{qt_ver}
 BuildRequires:	rpmbuild(macros) >= 1.736
@@ -41,6 +45,16 @@ BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xapian-core-devel
 BuildRequires:	xz
+Requires:	Qt5Core >= %{qt_ver}
+Requires:	Qt5Gui >= %{qt_ver}
+Requires:	ka5-akonadi >= %{ka_ver}
+Requires:	ka5-akonadi-mime >= %{ka_ver}
+Requires:	ka5-kmime >= %{ka_ver}
+Requires:	kf5-kcalendarcore >= %{kf_ver}
+Requires:	kf5-kconfig >= %{kf_ver}
+Requires:	kf5-kcontacts >= %{kf_ver}
+Requires:	kf5-ki18n >= %{kf_ver}
+Requires:	kf5-krunner >= %{kf_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,12 +69,12 @@ Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kaname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	Qt5Core-devel >= %{qt_ver}
-Requires:	ka5-akonadi-devel >= %{kdeappsver}
-Requires:	ka5-akonadi-mime-devel >= %{kdeappsver}
-Requires:	ka5-kmime-devel >= %{kdeappsver}
-Requires:	kf5-kcalendarcore-devel >= 5.105.0
-Requires:	kf5-kcontacts-devel >= 5.105.0
-Requires:	kf5-kcoreaddons-devel >= 5.105.0
+Requires:	ka5-akonadi-devel >= %{ka_ver}
+Requires:	ka5-akonadi-mime-devel >= %{ka_ver}
+Requires:	ka5-kmime-devel >= %{ka_ver}
+Requires:	kf5-kcalendarcore-devel >= %{kf_ver}
+Requires:	kf5-kcontacts-devel >= %{kf_ver}
+Requires:	kf5-kcoreaddons-devel >= %{kf_ver}
 
 %description devel
 Header files for %{kaname} development.
@@ -89,7 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
 
-%find_lang %{kaname} --all-name --with-kde
+%find_lang akonadi_search
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -97,8 +111,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files -f %{kaname}.lang
+%files -f akonadi_search.lang
 %defattr(644,root,root,755)
+%doc README.md
 %attr(755,root,root) %{_bindir}/akonadi_indexing_agent
 %attr(755,root,root) %{_bindir}/akonadi_html_to_text
 %attr(755,root,root) %{_libdir}/libKPim5AkonadiSearchCore.so.*.*.*
