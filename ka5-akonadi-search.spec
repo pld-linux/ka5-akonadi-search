@@ -36,7 +36,7 @@ BuildRequires:	kf5-krunner-devel >= %{kframever}
 BuildRequires:	kf5-plasma-framework-devel >= %{kframever}
 BuildRequires:	ninja
 BuildRequires:	qt5-build >= %{qt_ver}
-BuildRequires:	rpmbuild(macros) >= 1.164
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xapian-core-devel
